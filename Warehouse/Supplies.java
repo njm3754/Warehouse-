@@ -5,7 +5,7 @@ public class Supplies {
 	private Product product;
 	private float price; 
 	
-	private Supplies(Manufacturer manufacturer, Product product, float price) {
+	public Supplies(Manufacturer manufacturer, Product product, float price) {
 		this.manufacturer = manufacturer;
 		this.product = product;
 		this.price = price;

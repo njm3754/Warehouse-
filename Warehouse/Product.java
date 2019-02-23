@@ -26,12 +26,30 @@ public class Product implements Serializable {
   public String getDescription() {
     return description;
   }
+  
+  public Iterator getSuppliers()
+  {
+	  return assignedManufacturers.iterator();
+  }
 	
   public boolean assignManufacturer(Supplies supplies) {
 	  return assignedManufacturers.add(supplies);	 
   }
- public boolean unassignManufacturer(Supplies supplies) {
-	  return assignedManufacturers.remove(supplies);
+  public boolean unassignManufacturer(String productID, String manufacturerID) {
+	  Iterator suppliesIterator = assignedManufacturers.iterator();
+
+		while (suppliesIterator.hasNext())
+		{
+			Supplies supplies = (Supplies)(suppliesIterator.next());
+			Manufacturer manufacturer = supplies.getManufacturer();
+			Product product = supplies.getProduct();
+			if (product.getProductID().equals(productID) && manufacturer.getManufacturerID().equals(manufacturerID))
+			{
+				return assignedManufacturers.remove(supplies);
+			}
+		}
+
+		return false;
 	 
   }
   public String toString() {

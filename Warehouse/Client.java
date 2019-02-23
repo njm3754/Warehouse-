@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package warehouse;
 
 import java.util.*;
 import java.io.*;
@@ -23,7 +22,7 @@ public class Client implements Serializable{
     this.name = name;
     this.address = address;
     this.emailAddress = emailAddress;
-    id = CLIENT_STRING + (ClientIdServer.instance()).getId();
+    id = CLIENT_STRING + ClientIdServer.instance().getId();
   }
 
   public String getName() {
@@ -51,7 +50,7 @@ public class Client implements Serializable{
     return this.id.equals(id);
   }
   public String toString() {
-    String string = "Member name " + name + " address " + address + " id " + id + " emailAddress " + emailAddress;
+    String string = "Client name " + name + " address " + address + " id " + id + " emailAddress " + emailAddress;
     return string;
   }
 }

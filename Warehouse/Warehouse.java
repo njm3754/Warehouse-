@@ -12,14 +12,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
-import warehouse.ClientList;
-import warehouse.ClientIdServer;
-import warehouse.Client;
-import warehouse.Supplies;
-import warehouse.Product;
-import warehouse.ProductList;
-import warehouse.Manufacturer;
-import warehouse.ManufacturerList;
 
 
 public class Warehouse implements Serializable{
@@ -32,7 +24,7 @@ public class Warehouse implements Serializable{
     
     clientList = ClientList.instance();
     productList = ProductList.instance();
-    manufacturerList = ManufacturerList.intance();
+    manufacturerList = ManufacturerList.instance();
   }
   
   public static Warehouse instance() {
@@ -53,7 +45,7 @@ public class Warehouse implements Serializable{
     return null;
   }
    
-   public Iterator getClients() {
+   public Iterator getClientList() {
       return clientList.getClients();
   }
    public static Warehouse retrieve() {
@@ -74,14 +66,17 @@ public class Warehouse implements Serializable{
   }
    
    public Supplies assignProductToManufacturer(String productID, String manufacturerID, float price){
-       Supplies supplies = new Supplies(productID, manufacturerID, price);
-       boolean flag1, flag2;
+       boolean flag1 = false, flag2 = false;
        
-       p1 = searchProduct(productID);
-       m1 = searchManufacturer(manufacturerID);
+       Product p1 = productList.searchProduct(productID);
+       Manufacturer m1 = manufacturerList.searchManufacturer(manufacturerID);
+	   Supplies supplies = new Supplies(m1, p1, price);
        
-       flag1 = p1.unassignProduct(supplies);
-       flag2 = m1.unassignManufacturer(supplies);
+	   if (p1 != null && m1 != null)
+	   {
+			flag1 = p1.assignManufacturer(supplies);
+			flag2 = m1.assignProduct(supplies);
+	   }
        
        if (flag1 && flag2){
            return supplies;
@@ -92,16 +87,18 @@ public class Warehouse implements Serializable{
    
    
    public boolean unassignProductFromManufacturer(String productID, String manufacturerID) {
-       manufacturer m1;
-       product p1;
-       boolean flag1, flag2;
+       Manufacturer m1;
+       Product p1;
+       boolean flag1 = false, flag2 = false;
        
-       p1 = searchProduct(productID);
-       m1 = searchManufacturer(manufacturerID);
+       p1 = productList.searchProduct(productID);
+       m1 = manufacturerList.searchManufacturer(manufacturerID);       
        
-       
-       flag1 = p1.unassignProduct(productID, manufacturerID);
-       flag2 = m1.unassignManufacturer(productID, manufacturerID);
+	   if (p1 != null && m1 != null)
+	   {
+			flag1 = p1.unassignManufacturer(productID, manufacturerID);
+			flag2 = m1.unassignProduct(productID, manufacturerID);
+	   }
        
        return (flag1 && flag2);
    }
@@ -114,11 +111,11 @@ public class Warehouse implements Serializable{
     return null;
   }
    
-   public Iterator getManufacturer() {
-      return manufacturerList.getManufacturer();
+   public Iterator getManufacturerList() {
+      return manufacturerList.getManufacturerList();
   }
    
-   private Product addProduct(String name, String description, String ID) {
+   public Product addProduct(String name, String description, String ID) {
     Product product = new Product(name, description, ID);
     if (productList.insertProduct(product)) {
       return (product);
@@ -126,32 +123,42 @@ public class Warehouse implements Serializable{
     return null;
   }
    
-   public Iterator getProduct() {
-      return productList.getProduct();
+   public Iterator getProductList() {
+      return productList.getProducts();
   }
    
    public Iterator getProductSupplierList(String productID){
-       product p1;
-       
-       p1 = searchProduct(productID);
-       return(p1.getSuppliers());
+       Product p1 = productList.searchProduct(productID);
+	   if (p1 != null)
+	   {
+			return(p1.getSuppliers());   
+	   }
+	   else
+	   {
+		   return null;
+	   }
    }
    
    public Iterator getManufacturerProductList(String manufacturerID){
-       manufacturer m1;
-       
-       m1 = searchManufacturer(manufacturerID);
-       return(m1.getSuppliedProducts());
+       Manufacturer m1 = manufacturerList.searchManufacturer(manufacturerID);
+       if (m1 != null)
+	   {
+		   return(m1.getSuppliedProducts());
+	   }
+	   else
+	   {
+		   return null;
+	   }
    }
    
    
-public static  boolean save() {
+	public static  boolean save() {
     try {
       FileOutputStream file = new FileOutputStream("WarehouseData");
       ObjectOutputStream output = new ObjectOutputStream(file);
       output.writeObject(warehouse);
       output.writeObject(ClientIdServer.instance());
-      output.writeObject(ManufacturerIdServer.instance());
+      output.writeObject(ManufacturerIDServer.instance());
       return true;
     } catch(IOException ioe) {
       ioe.printStackTrace();
@@ -184,6 +191,6 @@ public static  boolean save() {
   }
    
     public String toString() {
-    return productList + "\n" manufacturerList + "\n" + clientList;
+    return productList + "\n" + manufacturerList + "\n" + clientList;
   }
 }

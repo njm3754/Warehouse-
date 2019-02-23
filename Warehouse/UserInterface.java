@@ -108,7 +108,7 @@ public class UserInterface {
 	{
 		do {
 			try {
-				int value = Integer.parseInt(getToken("Enter command:" + HELP + " for help"));
+				int value = Integer.parseInt(getToken("Enter command: " + HELP + " for help"));
 				if (value >= EXIT && value <= HELP) {
 					return value;
 				}
@@ -126,7 +126,7 @@ public class UserInterface {
 		System.out.println(ADD_PRODUCTS + " to add products");
 		System.out.println(ADD_MANUFACTURER + " to add a manufacturer");
 		System.out.println(ASSIGN_PRODUCT_TO_MANUFACTURER + " to assign a product to a manufacturer");
-		System.out.println(UNASSIGN_PRODUCT_TO_MANUFACTURER + " to assign a product to a manufacturer");
+		System.out.println(UNASSIGN_PRODUCT_TO_MANUFACTURER + " to unassign a product to a manufacturer");
 		System.out.println(SHOW_CLIENTS + " to show a show a list of clients");
 		System.out.println(SHOW_MANUFACTURERS + " to show a show a list of manufacturers");
 		System.out.println(SHOW_PRODUCTS + " to show a show a list of products");
@@ -220,7 +220,7 @@ public class UserInterface {
 		Iterator clientList = warehouse.getClientList();
 		while (clientList.hasNext()){
 			Client client = (Client)(clientList.next());
-			System.out.println(Client.toString());
+			System.out.println(client.toString());
 		}
 	}
 
@@ -246,9 +246,16 @@ public class UserInterface {
 	{
 		String productID = getToken("Enter product ID");
 		Iterator productSupplierList = warehouse.getProductSupplierList(productID);
-		while (productSupplierList.hasNext()){
-			Supplies supplies = (Supplies)(productSupplierList.next());
-			System.out.println(supplies.toString());
+		if (productSupplierList != null)
+		{
+			while (productSupplierList.hasNext()){
+				Supplies supplies = (Supplies)(productSupplierList.next());
+				System.out.println(supplies.toString());
+			}	
+		}
+		else
+		{
+			System.out.println("Product not found");
 		}
 	}
 
@@ -256,9 +263,16 @@ public class UserInterface {
 	{
 		String manufacturerID = getToken("Enter manufacturer ID");
 		Iterator manufacturerProductList = warehouse.getManufacturerProductList(manufacturerID);
-		while (manufacturerProductList.hasNext()){
-			Supplies supplies = (Supplies)(manufacturerSuppliedProducts.next());
-			System.out.println(supplies.toString());
+		if (manufacturerProductList != null)
+		{
+			while (manufacturerProductList.hasNext()){
+				Supplies supplies = (Supplies)(manufacturerProductList.next());
+				System.out.println(supplies.toString());
+			}	
+		}
+		else
+		{
+			System.out.println("Manufacturer not found");
 		}
 	}
 

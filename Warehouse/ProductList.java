@@ -4,7 +4,7 @@ import java.io.*;
 
 public class ProductList implements Serializable {
   private static final long serialVersionUID = 1L;
-  private List products = new LinkedList();
+  private List<Product> products = new LinkedList<Product>();
   private static ProductList productList;
 
   private ProductList() {}
@@ -26,16 +26,32 @@ public class ProductList implements Serializable {
     return products.iterator();
   }
   
- /* private void writeObject(java.io.ObjectOutputStream output) {
+  public Product searchProduct(String productID)
+	{
+		Iterator productIterator = products.iterator();
+
+		while (productIterator.hasNext())
+		{
+			Product product = (Product)(productIterator.next());
+			if (product.getProductID().equals(productID))
+			{
+				return product;
+			}
+		}
+
+		return null;
+	}
+  
+  private void writeObject(java.io.ObjectOutputStream output) {
     try {
       output.defaultWriteObject();
       output.writeObject(productList);
     } catch(IOException ioe) {
       System.out.println(ioe);
     }
-  }*/
+  }
   
-  /*private void readObject(java.io.ObjectInputStream input) {
+  private void readObject(java.io.ObjectInputStream input) {
     try {
       if (productList != null) {
         return;
@@ -52,7 +68,7 @@ public class ProductList implements Serializable {
     } catch(ClassNotFoundException cnfe) {
       cnfe.printStackTrace();
     }
-  }*/
+  }
   
   public String toString() {
     return products.toString();
