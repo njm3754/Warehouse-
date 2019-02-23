@@ -6,33 +6,35 @@ public class Product implements Serializable {
   private static final long serialVersionUID = 1L;
   private String ID;
   private String name;
-  private double price;
-  private int qty;
+  private String description; 
+  private List<Supplies> assignedManufacturers = new LinkedList<Supplies>();
 
-  public Product(String ID, String name) {
+  public Product(String ID, String name, String description) {
     this.ID = ID;
-	price = -1;
-	qty = 0;
 	this.name = name;
-  }
-
-  public void setPrice(double price) {
-    this.price = price;
-  }
-	
-  public double getPrice() {
-    return price;
+	this.description = description;
   }
 	
   public String getProductID() {
     return ID;
   }
-	
-  public void setQuantity(int qty) {
-    this.qty = qty;
+
+  public String getName() {
+    return name;
   }
-  
+	
+  public String getDescription() {
+    return description;
+  }
+	
+  public boolean assignManufacturer(Supplies supplies) {
+	  return assignedManufacturers.add(supplies);	 
+  }
+ public boolean unassignManufacturer(Supplies supplies) {
+	  return assignedManufacturers.remove(supplies);
+	 
+  }
   public String toString() {
-      return "Product ID " + ID + " name " + name + " quantity " + qty;
+      return "Product ID " + ID + " Name " + name + " Description " + description;
   }
 }
