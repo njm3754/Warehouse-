@@ -1,8 +1,8 @@
 import java.util.*;
 import java.text.*;
 import java.io.*;
-public class UserInterface {
-	private static UserInterface userInterface;
+public class userinterface {
+	private static userinterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	private static Warehouse warehouse;
 	private static final int EXIT = 0;
@@ -20,7 +20,7 @@ public class UserInterface {
 	private static final int RETRIEVE = 12;
 	private static final int HELP = 13;
 
-	private UserInterface()
+	private userinterface()
 	{
 		if (yesOrNo("Look for saved data and  use it?")) {
 			retrieve();
@@ -29,10 +29,10 @@ public class UserInterface {
 		}
 	}
 
-	public static UserInterface instance()
+	public static userinterface instance()
 	{
 		if (userInterface == null) {
-			return userInterface = new UserInterface();
+			return userInterface = new userinterface();
 		} else {
 			return userInterface;
 		}
@@ -350,6 +350,6 @@ public class UserInterface {
 	}
 
 	public static void main(String[] s) {
-		UserInterface.instance().process();
+		userinterface.instance().process();
 	}
 }

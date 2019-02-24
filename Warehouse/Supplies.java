@@ -1,6 +1,8 @@
+import java.util.*;
+import java.io.*;
 
-public class Supplies {
-	
+public class Supplies implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Manufacturer manufacturer; 
 	private Product product;
 	private float price; 
@@ -22,7 +24,7 @@ public class Supplies {
 	}
 	
 	public String toString() {
-	    return  manufacturer.toString() +  product.toString() + " Price " + price;
+	    return  manufacturer.toString() +  " " + product.toString() + " Price " + price;
 	  }
 	  
 }
