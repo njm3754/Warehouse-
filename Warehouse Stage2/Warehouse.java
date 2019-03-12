@@ -109,8 +109,8 @@ public class Warehouse implements Serializable{
       return manufacturerList.getManufacturerList();
   }
    
-   public Product addProduct(String name, String description, String ID) {
-    Product product = new Product(name, description, ID);
+   public Product addProduct(String name, String description, String ID, float price) {
+    Product product = new Product(name, description, ID, price);
     if (productList.insertProduct(product)) {
       return (product);
     }
@@ -228,5 +228,8 @@ public class Warehouse implements Serializable{
     public Iterator getOutstandingBalanceClientsList() {
       return clientList.getOutstandingBalanceList();
     }
-
-}
+    
+    public Invoice acceptShipment(String productID, int quantity){
+        return productList.acceptShipment(productID, quantity);
+    }
+} 
