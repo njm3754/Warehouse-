@@ -24,13 +24,13 @@ public class InvoiceList implements Serializable {
 		  return true;
 	  }
 	   
-	  public Iterator getinvoices() {
+	  public Iterator<Invoice> getinvoices() {
 		 return invoices.iterator();
 	  }
 	  
 	  public Invoice searchInvoice(String invoiceID)
 		{
-			Iterator invoiceIterator = invoices.iterator();
+			Iterator<Invoice> invoiceIterator = invoices.iterator();
 
 			while (invoiceIterator.hasNext())
 			{

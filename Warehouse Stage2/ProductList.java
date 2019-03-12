@@ -1,5 +1,4 @@
 import java.util.*;
-import java.lang.*;
 import java.io.*;
 
 public class ProductList implements Serializable {
@@ -22,7 +21,7 @@ public class ProductList implements Serializable {
     return true;
   }
   
-  public Iterator getProducts() {
+  public Iterator<Product> getProducts() {
     return products.iterator();
   }
   

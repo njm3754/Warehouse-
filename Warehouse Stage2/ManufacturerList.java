@@ -21,7 +21,7 @@ public class ManufacturerList implements Serializable {
 
 	public Manufacturer searchManufacturer(String manufacturerID)
 	{
-		Iterator manufacturerIterator = manufacturers.iterator();
+		Iterator<Manufacturer> manufacturerIterator = manufacturers.iterator();
 
 		while (manufacturerIterator.hasNext())
 		{
@@ -35,7 +35,7 @@ public class ManufacturerList implements Serializable {
 		return null;
 	}
 
-	public Iterator getManufacturerList(){
+	public Iterator<Manufacturer> getManufacturerList(){
 		 return manufacturers.iterator();
 	}
 	

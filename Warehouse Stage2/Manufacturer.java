@@ -10,7 +10,7 @@ public class Manufacturer implements Serializable  {
 
 	public Manufacturer(String name, String address)
 	{
-		manufacturerID = MANUFACTURER_STRING + ManufacturerIDServer.instance().getID();
+		manufacturerID = "TESTID";
 		this.name = name;
 		this.address = address;
 	}
