@@ -166,15 +166,15 @@ public class userinterface {
 
 	public void addProducts()
 	{
-		Product result;
 		do {
 			String productID = getToken("Enter product UPC");
 			String name = getToken("Enter name");
 			String description = getToken("Enter description");
+			float salePrice = getFloat("Enter sale price");
 
-			result = warehouse.addProduct(productID, name, description);
+			Product result = warehouse.addProduct(productID, name, description, salePrice);
 			if (result != null) {
-				System.out.println(result);
+				System.out.println(result.toString());
 			} else {
 				System.out.println("Product could not be added");
 			}
@@ -323,7 +323,10 @@ public class userinterface {
 
 	public void acceptPayment()
 	{
-		System.out.println("accept payment");
+		String clientID = getToken("Enter client ID");
+		float paymentAmount = getToken("Enter payment amount");
+		float newAccountBalance = warehouse.makePayment(clientID, paymentAmount);
+		System.out.println("Payment accepted. New Account Balance: " + newAccountBalance);
 	}
 
 	public void showOutstandingBalanceClients()
@@ -337,17 +340,38 @@ public class userinterface {
 
 	public void showProductWaitlistedOrders()
 	{
-		System.out.println("showProductWaitlistedOrders");
+		String productID = getToken("Enter product ID");
+		Iterator productWaitlist = warehouse.getProductWaitlist(productID);
+		while (productWaitlist.hasNext()){
+			WaitlistItem waitlistItem = (WaitlistItem)(productWaitlist.next());
+			System.out.println(waitlistItem.toString());
+		}
 	}
 
 	public void showClientWaitlistedOrders()
 	{
-		System.out.println("showClientWaitlistedOrders");
+		String clientID = getToken("Enter client ID");
+		Iterator clientWaitlist = warehouse.getClientWaitlist(clientID);
+		while (clientWaitlist.hasNext()){
+			WaitlistItem waitlistItem = (WaitlistItem)(clientWaitlist.next());
+			System.out.println(waitlistItem.toString());
+		}
 	}
 
 	public void receiveShipment()
 	{
-		System.out.println("receiveShipment");
+		String productID = getToken("Enter product ID");
+		int quantity = getToken("Enter quantity");
+		Invoice invoice = warehouse.(productID, quantity);
+
+		if (invoice != null)
+		{
+			System.out.println(invoice.toString());
+		}
+		else
+		{
+			System.out.println("Shipment received.");
+		}
 	}
 
 	private void save()
