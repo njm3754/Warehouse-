@@ -324,7 +324,7 @@ public class userinterface {
 	public void acceptPayment()
 	{
 		String clientID = getToken("Enter client ID");
-		float paymentAmount = getToken("Enter payment amount");
+		float paymentAmount = getFloat("Enter payment amount");
 		float newAccountBalance = warehouse.makePayment(clientID, paymentAmount);
 		System.out.println("Payment accepted. New Account Balance: " + newAccountBalance);
 	}
@@ -361,11 +361,12 @@ public class userinterface {
 	public void receiveShipment()
 	{
 		String productID = getToken("Enter product ID");
-		int quantity = getToken("Enter quantity");
-		Invoice invoice = warehouse.(productID, quantity);
+		int quantity = getNumber("Enter quantity");
+		Invoice invoice = warehouse.receiveShipment(productID, quantity);
 
 		if (invoice != null)
 		{
+			System.out.println("Shipment received. Wait listed orders filled: ");
 			System.out.println(invoice.toString());
 		}
 		else

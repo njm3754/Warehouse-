@@ -1,3 +1,4 @@
+import java.util.*;
 import java.io.*;
 
 public class Product implements Serializable {
@@ -7,14 +8,14 @@ public class Product implements Serializable {
   private String description;
   private float saleprice; 
   private int stockCount = 0; 
-  //private List<Supplies> assignedManufacturers = new LinkedList<Supplies>();
+  private List<Supplies> assignedManufacturers = new LinkedList<Supplies>();
+  private List<WaitlistItem> productWaitlist = new LinkedList<WaitlistItem>();
 
-  public Product(String ID, String name, String description, float saleprice, int stockCount1) {
+  public Product(String ID, String name, String description, float saleprice) {
     this.ID = ID;
 	this.name = name;
 	this.description = description;
 	this.saleprice = saleprice;
-	this.stockCount = stockCount + stockCount1;
   }
 	
   public String getProductID() {
@@ -31,13 +32,23 @@ public class Product implements Serializable {
   public float getSalePrice() {
 	  return saleprice;
   }
+  
+  public Iterator getProductWaitlist()
+  {
+	  return productWaitlist.iterator();
+  }
+  
   public void addStock(int stockCount1) {
-   
 	  this.stockCount = stockCount + stockCount1;
   }
-  /*public Iterator getSuppliers()
+  public Iterator getSuppliers()
   {
 	  return assignedManufacturers.iterator();
+  }
+  
+  public int getStockCount()
+  {
+	  return stockCount;
   }
 	
   public boolean assignManufacturer(Supplies supplies) {
@@ -59,7 +70,8 @@ public class Product implements Serializable {
 
 		return false;
 	 
-  }*/
+  }
+  
   public String toString() {
       return "Product ID " + ID + " Name " + name + " Description " + description;
   }

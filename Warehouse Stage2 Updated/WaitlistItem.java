@@ -2,25 +2,32 @@
 public class WaitlistItem {
  
 	private Client client;
-	private OrderItem orderitem;
+	private Product product;
+	private int quantity;
 	
-	public WaitlistItem(Client client, OrderItem orderitem) {
+	public WaitlistItem(Client client, Product product, int quantity) {
 		
 		this.client = client;
-		this.orderitem = orderitem; 
+		this.product = product; 
+		this.quantity = quantity;
 		
 	}
 	
-	public Client getclient() {
+	public Client getClient() {
 		return client;
 	}
 	
-	public OrderItem getorderitem() {
-		return orderitem;
+	public Product getProduct() {
+		return product;
+	}
+	
+	public int getQuantity()
+	{
+		return quantity;
 	}
 	
 	public String toString() {
-		return client.toString() + " " + orderitem.toString();
+		return client.toString() + " " + product.toString() + " Quantity: " + quantity;
 		
 	}
 }

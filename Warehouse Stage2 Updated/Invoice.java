@@ -21,7 +21,7 @@ public class Invoice implements Serializable{
 		  id = Invoice_String + InvoiceIDServer.instance().getID();
 	  }
 	  
-	  public boolean addorderitem (OrderItem orderitem) {
+	  public boolean addOrderItem (OrderItem orderitem) {
 		  orderitems.add(orderitem);
 		  totalPrice = totalPrice + orderitem.getSalePrice();
 		  return true;

@@ -87,7 +87,7 @@ public class Client implements Serializable{
       return invoices.iterator();
   }
   
-  public boolean createInvoice(Client client){
+  public Invoice createInvoice(Client client){
       Invoice invoice = new Invoice(client);
       return invoice;
   }
@@ -103,7 +103,7 @@ public class Client implements Serializable{
   }
   
   public boolean addWaitlistItem(WaitlistItem waitlistItem){
-      return orderWaitlist.addWaitlistItem(waitlistItem);
+      return orderWaitlist.add(waitlistItem);
   }
   
   public boolean hasOutstandingBalance(){
