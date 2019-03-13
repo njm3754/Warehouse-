@@ -106,6 +106,10 @@ public class Client implements Serializable{
       return orderWaitlist.add(waitlistItem);
   }
   
+  public boolean removeWaitlistItem(WaitlistItem waitlistItem){
+      return orderWaitlist.remove(waitlistItem);
+  }
+  
   public boolean hasOutstandingBalance(){
       return account.hasOutstandingBalance();
   }
