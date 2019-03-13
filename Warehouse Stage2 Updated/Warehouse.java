@@ -229,7 +229,7 @@ public class Warehouse implements Serializable{
       return clientList.getOutstandingBalanceList();
     }
     
-    public Invoice receiveShipment(String productID, int quantity){
+    public Iterator receiveShipment(String productID, int quantity){
         return productList.receiveShipment(productID, quantity);
     }
 } 
