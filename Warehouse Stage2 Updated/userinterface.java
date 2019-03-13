@@ -367,7 +367,6 @@ public class userinterface {
 		System.out.println("Shipment received.");
 		while (invoices.hasNext())
 		{
-			
 			System.out.println("Wait listed order filled: ");
 			Invoice invoice = (Invoice)(invoices.next());
 			System.out.println(invoice.toString());
