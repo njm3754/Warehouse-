@@ -41,7 +41,7 @@ public class ProductList implements Serializable {
 		return null;
 	}
   
-  public Invoice receiveShipment (String productID, int quantity) {
+  public Iterator receiveShipment (String productID, int quantity) {
 	  
 	  Iterator<Product> productIterator = products.iterator();
 
@@ -50,7 +50,7 @@ public class ProductList implements Serializable {
 			Product product = (Product)(productIterator.next());
 			if (product.getProductID().equals(productID))
 			{
-				return product.addStock(quantity);;
+				return product.addStock(quantity);
 			}
 		}
 		return null;

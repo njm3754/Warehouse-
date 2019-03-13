@@ -33,13 +33,42 @@ public class Product implements Serializable {
 	  return saleprice;
   }
   
-  public Iterator getProductWaitlist()
+  public Iterator<WaitlistItem> getProductWaitlist()
   {
 	  return productWaitlist.iterator();
   }
   
-  public void addStock(int stockCount1) {
-	  this.stockCount = stockCount + stockCount1;
+  public Iterator  addStock(int stockCount1) {
+      Iterator<WaitlistItem> WaitlistedItems = getProductWaitlist(); 
+      WaitlistItem waitlistitem;
+      List<Invoice> listinvoices = new LinkedList<Invoice>();
+      
+      while(stockCount1!=0 && WaitlistedItems.hasNext() ) {
+    	  waitlistitem = WaitlistedItems.next();
+    	  int x = waitlistitem.getQuantity();
+    	  
+    	
+    	  if(x <= stockCount1) {
+    		  stockCount1 = stockCount1 - x;
+    		  Invoice invoice = new Invoice(waitlistitem.getClient());
+    		  OrderItem orderitem = new OrderItem(this, x, saleprice);
+    		  invoice.addOrderItem(orderitem);
+    		  listinvoices.add(invoice);
+
+    	  }
+    	  else {
+    		  waitlistitem.decrementQuantity(stockCount1);
+    		  Invoice invoice = new Invoice(waitlistitem.getClient());
+    		  OrderItem orderitem = new OrderItem(this, stockCount1, saleprice);
+    		  invoice.addOrderItem(orderitem);
+    		  listinvoices.add(invoice);
+    		  stockCount1 = 0;
+    	  	}
+
+
+      }
+      stockCount = stockCount + stockCount1;
+      return listinvoices.iterator();
   }
   public Iterator getSuppliers()
   {

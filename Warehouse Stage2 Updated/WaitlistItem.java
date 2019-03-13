@@ -1,4 +1,3 @@
-
 public class WaitlistItem {
  
 	private Client client;
@@ -24,6 +23,9 @@ public class WaitlistItem {
 	public int getQuantity()
 	{
 		return quantity;
+	}
+	public void decrementQuantity(int quantity) {
+		this.quantity -= quantity;
 	}
 	
 	public String toString() {
