@@ -362,16 +362,15 @@ public class userinterface {
 	{
 		String productID = getToken("Enter product ID");
 		int quantity = getNumber("Enter quantity");
-		Invoice invoice = warehouse.receiveShipment(productID, quantity);
+		Iterator invoices = warehouse.receiveShipment(productID, quantity);
 
-		if (invoice != null)
+		System.out.println("Shipment received.");
+		while (invoices.hasNext())
 		{
-			System.out.println("Shipment received. Wait listed orders filled: ");
+			
+			System.out.println("Wait listed order filled: ");
+			Invoice invoice = (Invoice)(invoices.next());
 			System.out.println(invoice.toString());
-		}
-		else
-		{
-			System.out.println("Shipment received.");
 		}
 	}
 
