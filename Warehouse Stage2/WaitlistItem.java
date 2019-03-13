@@ -1,10 +1,10 @@
 
-public class WaitlistItem {
+public class WaitListItem {
  
 	private Client client;
 	private OrderItem orderitem;
 	
-	public WaitlistItem(Client client, OrderItem orderitem) {
+	public WaitListItem(Client client, OrderItem orderitem) {
 		
 		this.client = client;
 		this.orderitem = orderitem; 
