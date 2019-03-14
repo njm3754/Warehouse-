@@ -23,7 +23,7 @@ public class Invoice implements Serializable{
 	  
 	  public boolean addOrderItem (OrderItem orderitem) {
 		  orderitems.add(orderitem);
-		  totalPrice = totalPrice + orderitem.getSalePrice();
+		  totalPrice = totalPrice + (orderitem.getSalePrice() * orderitem.getQuantity());
 		  return true;
 	  }
 	  
@@ -40,7 +40,12 @@ public class Invoice implements Serializable{
 		}
 	  
 	  public String toString() {
-		  return "Client: " + client + "\n Invoice ID: " + id +  "\nTotal Price: " + totalPrice + "\nDate: "+ date;
+		  String invoiceDisplay = "";
+		  if (orderitems.size() > 0)
+		  {
+			  invoiceDisplay = "Client ID: " + client.getId() + "\nInvoice ID: " + id +  "\nTotal Price: " + totalPrice + "\nDate: "+ date + "\nOrder Items: " + orderitems.toString();
+		  }
+		  return invoiceDisplay;
 	  }
 
 

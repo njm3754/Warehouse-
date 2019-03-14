@@ -196,22 +196,30 @@ public class Warehouse implements Serializable{
     
     public Order createOrder(String clientID){
         Client client = searchClient(clientID);
+		if (client == null)
+		{
+			return null;
+		}
         Order order = new Order(client);
         return order;
     }
     
     public Product searchProduct(String productID){
-            Product product = searchProduct(productID);
+            Product product = productList.searchProduct(productID);
             return product;
     }
     
     public Client searchClient(String clientID){
-            Client client = searchClient(clientID);
+            Client client = clientList.searchClient(clientID);
             return client;
     }
         
     public Iterator getClientWaitlist(String clientID){     
        Client c1 = clientList.searchClient(clientID);
+	   if (c1 == null)
+	   {
+		   return null;
+	   }
         return c1.getOrderWaitlist();
     }
     
@@ -222,6 +230,10 @@ public class Warehouse implements Serializable{
     
     public Iterator getProductWaitlist(String productID){
         Product p1 = searchProduct(productID);
+		if (p1 == null)
+		{
+			return null;
+		}
         return p1.getProductWaitlist();
     }
     

@@ -315,6 +315,7 @@ public class userinterface {
 			//Process Order
 			if (!order.isEmpty())
 			{
+				System.out.println("Order placed.");
 				Invoice invoice = warehouse.addOrder(order);
 				System.out.println(invoice.toString());
 			}
@@ -334,6 +335,7 @@ public class userinterface {
 		Iterator clientList = warehouse.getOutstandingBalanceClientsList();
 		while (clientList.hasNext()){
 			Client client = (Client)(clientList.next());
+			float accountBalance = client.getAccountBalance();
 			System.out.println(client.toString());
 		}
 	}
@@ -342,9 +344,12 @@ public class userinterface {
 	{
 		String productID = getToken("Enter product ID");
 		Iterator productWaitlist = warehouse.getProductWaitlist(productID);
-		while (productWaitlist.hasNext()){
-			WaitlistItem waitlistItem = (WaitlistItem)(productWaitlist.next());
-			System.out.println(waitlistItem.toString());
+		if (productWaitlist != null)
+		{
+			while (productWaitlist.hasNext()){
+				WaitlistItem waitlistItem = (WaitlistItem)(productWaitlist.next());
+				System.out.println(waitlistItem.toString() + "\n");
+			}	
 		}
 	}
 
@@ -352,9 +357,12 @@ public class userinterface {
 	{
 		String clientID = getToken("Enter client ID");
 		Iterator clientWaitlist = warehouse.getClientWaitlist(clientID);
-		while (clientWaitlist.hasNext()){
-			WaitlistItem waitlistItem = (WaitlistItem)(clientWaitlist.next());
-			System.out.println(waitlistItem.toString());
+		if (clientWaitlist != null)
+		{
+			while (clientWaitlist.hasNext()){
+				WaitlistItem waitlistItem = (WaitlistItem)(clientWaitlist.next());
+				System.out.println(waitlistItem.toString() + "\n");
+			}	
 		}
 	}
 
@@ -364,12 +372,19 @@ public class userinterface {
 		int quantity = getNumber("Enter quantity");
 		Iterator invoices = warehouse.receiveShipment(productID, quantity);
 
-		System.out.println("Shipment received.");
-		while (invoices.hasNext())
+		if (invoices != null)
 		{
-			System.out.println("Wait listed order filled: ");
-			Invoice invoice = (Invoice)(invoices.next());
-			System.out.println(invoice.toString());
+			System.out.println("Shipment received.");
+			while (invoices.hasNext())
+			{
+				System.out.println("Wait listed order filled: ");
+				Invoice invoice = (Invoice)(invoices.next());
+				System.out.println("\n" + invoice.toString() + "\n");
+			}	
+		}
+		else
+		{
+			System.out.println("A problem occurred. Shipment was not received.");
 		}
 	}
 

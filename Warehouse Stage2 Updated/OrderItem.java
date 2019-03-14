@@ -29,6 +29,6 @@ public class OrderItem implements Serializable  {
 	}
 
 	public String toString() {
-		return product.toString() + " | Quantity: " + quantity + " | Sale Price: " + salePrice;
+		return "Product ID: " + product.getProductID() + "\n Quantity: " + quantity + "\n Sale Price: " + salePrice;
 	}
 }

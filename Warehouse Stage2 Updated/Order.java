@@ -41,7 +41,8 @@ public class Order implements Serializable  {
 		OrderItem orderItem = new OrderItem(product, quantity, salePrice);
 		orderItems.add(orderItem);
 
-		orderTotal += salePrice;
+		System.out.println("Sale price: " + salePrice + " quantity: " + quantity);
+		orderTotal += salePrice * quantity;
 
 		return orderItem;
 	}

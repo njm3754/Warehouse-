@@ -1,5 +1,8 @@
-public class WaitlistItem {
- 
+import java.util.*;
+import java.io.*;
+
+public class WaitlistItem implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Client client;
 	private Product product;
 	private int quantity;
@@ -29,7 +32,7 @@ public class WaitlistItem {
 	}
 	
 	public String toString() {
-		return client.toString() + " " + product.toString() + " Quantity: " + quantity;
+		return "Waitlist Item: \nClient ID: " + client.getId() + "\n" + product.toString() + "\nQuantity: " + quantity;
 		
 	}
 }
