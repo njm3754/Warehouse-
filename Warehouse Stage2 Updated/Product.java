@@ -55,16 +55,20 @@ public class Product implements Serializable {
     		  invoice.addOrderItem(orderitem);
     		  listinvoices.add(invoice);
     		  WaitlistedItems.remove();
+    		  waitlistitem.getClient().removeWaitlistItem(waitlistitem);
+    		  
     		  
 
     	  }
     	  else {
+    		  /*Copy of Object gets changed not the actual object*/
     		  waitlistitem.decrementQuantity(stockCount1);
     		  Invoice invoice = new Invoice(waitlistitem.getClient());
     		  OrderItem orderitem = new OrderItem(this, stockCount1, saleprice);
     		  invoice.addOrderItem(orderitem);
     		  listinvoices.add(invoice);
     		  stockCount1 = 0;
+
     	  	}
 
 
