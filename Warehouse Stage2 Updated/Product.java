@@ -54,6 +54,8 @@ public class Product implements Serializable {
     		  OrderItem orderitem = new OrderItem(this, x, saleprice);
     		  invoice.addOrderItem(orderitem);
     		  listinvoices.add(invoice);
+    		  WaitlistedItems.remove();
+    		  
 
     	  }
     	  else {
