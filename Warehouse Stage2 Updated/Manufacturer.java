@@ -69,6 +69,6 @@ public class Manufacturer implements Serializable  {
 	}
 
 	public String toString() {
-		return "Manufacturer ID: " + manufacturerID + " | Name: " + name + " | Address: " + address;
+		return "Manufacturer ID: " + manufacturerID + "\n Name: " + name + "\n Address: " + address;
 	}
 }
