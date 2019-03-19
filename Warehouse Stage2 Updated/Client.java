@@ -20,6 +20,7 @@ public class Client implements Serializable{
     this.address = address;
     this.emailAddress = emailAddress;
     id = CLIENT_STRING + (ClientIdServer.instance()).getId();
+	account = new Account();
   }
 
   public String getName() {
@@ -55,7 +56,7 @@ public class Client implements Serializable{
   }
   
   public String toString() {
-    String string = "Member name " + name + " address " + address + " id " + id + " emailAddress " + emailAddress;
+    String string = "Client ID: " + id + "\n Name: " + name + "\n Address: " + address + "\n Email Address: " + emailAddress + "\n Account Balance: " + account.getBalance();
     return string;
   }
   
@@ -119,14 +120,19 @@ public class Client implements Serializable{
       float salePrice = product.getSalePrice();
       int quantity = orderItem.getQuantity();
       int stock = product.getStockCount();
+	  int quantityAvailable = quantityAvailable(quantity,stock);
       OrderItem orderItem2;
       
-      orderItem2 = createOrderItem(product, quantityAvailable(quantity,stock), salePrice);
-      addOrderItem(orderItem2, invoice);
+	  if (quantityAvailable > 0)
+	  {
+		orderItem2 = createOrderItem(product, quantityAvailable, salePrice);
+		addOrderItem(orderItem2, invoice);  
+	  }
       
       if (quantity > stock){
           WaitlistItem waitlistItem = createWaitlistItem(client, product,(quantity-stock));
           addWaitlistItem(waitlistItem);
+		  product.addWaitlistItem(waitlistItem);
         }
             
       return true;
@@ -179,11 +185,17 @@ public Iterator getOrderItems(Order order){
      addOrderToList(order);
      
      invoice = populateInvoice(order, invoice, client);
+	 chargeAccount(order.getOrderTotal());
      
      String description = order.toString();
      Transaction transaction = createTransaction( description, getOrderTotal(order));
      addTransactionToList(transaction);
      
      return invoice;
+ }
+ 
+ public float getAccountBalance()
+ {
+     return account.getBalance();
  }
 }
