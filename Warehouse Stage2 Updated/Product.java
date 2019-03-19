@@ -38,6 +38,11 @@ public class Product implements Serializable {
 	  return productWaitlist.iterator();
   }
   
+  public boolean addWaitlistItem(WaitlistItem waitlistItem)
+  {
+	  return productWaitlist.add(waitlistItem);
+  }
+  
   public Iterator  addStock(int stockCount1) {
       Iterator<WaitlistItem> WaitlistedItems = getProductWaitlist(); 
       WaitlistItem waitlistitem;
@@ -108,7 +113,7 @@ public class Product implements Serializable {
   }
   
   public String toString() {
-      return "Product ID " + ID + " Name " + name + " Description " + description;
+      return "Product ID: " + ID + "\n Name: " + name + "\n Description: " + description + "\n In Stock: " + stockCount + "\n Sale Price: " + saleprice;
   }
 
 
