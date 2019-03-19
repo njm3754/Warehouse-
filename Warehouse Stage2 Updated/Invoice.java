@@ -43,7 +43,7 @@ public class Invoice implements Serializable{
 		  String invoiceDisplay = "";
 		  if (orderitems.size() > 0)
 		  {
-			  invoiceDisplay = "Client ID: " + client.getId() + "\nInvoice ID: " + id +  "\nTotal Price: " + totalPrice + "\nDate: "+ date + "\nOrder Items: " + orderitems.toString();
+			  invoiceDisplay = "Client ID: " + client.getId() + "\nInvoice ID: " + id +  "\nTotal Price: " + String.format("%.2f", totalPrice) + "\nDate: "+ date + "\nOrder Items: " + orderitems.toString();
 		  }
 		  return invoiceDisplay;
 	  }

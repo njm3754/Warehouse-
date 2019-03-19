@@ -56,7 +56,7 @@ public class Client implements Serializable{
   }
   
   public String toString() {
-    String string = "Client ID: " + id + "\n Name: " + name + "\n Address: " + address + "\n Email Address: " + emailAddress + "\n Account Balance: " + account.getBalance();
+    String string = "Client ID: " + id + "\n Name: " + name + "\n Address: " + address + "\n Email Address: " + emailAddress + "\n Account Balance: " + String.format("%.2f", account.getBalance());
     return string;
   }
   

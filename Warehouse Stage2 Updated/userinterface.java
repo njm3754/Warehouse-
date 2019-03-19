@@ -315,9 +315,15 @@ public class userinterface {
 			//Process Order
 			if (!order.isEmpty())
 			{
-				System.out.println("Order placed.");
+				System.out.println("\nOrder placed.");
+
 				Invoice invoice = warehouse.addOrder(order);
-				System.out.println(invoice.toString());
+				String invoiceString = invoice.toString();
+				if (invoiceString != "")
+				{
+					System.out.println("\nProducts available to ship:\n");
+					System.out.println(invoiceString);
+				}
 			}
 		}
 	}
@@ -374,10 +380,10 @@ public class userinterface {
 
 		if (invoices != null)
 		{
-			System.out.println("Shipment received.");
+			System.out.println("\nShipment received.");
 			while (invoices.hasNext())
 			{
-				System.out.println("Wait listed order filled: ");
+				System.out.println("\nWait listed order filled: ");
 				Invoice invoice = (Invoice)(invoices.next());
 				System.out.println("\n" + invoice.toString() + "\n");
 			}	

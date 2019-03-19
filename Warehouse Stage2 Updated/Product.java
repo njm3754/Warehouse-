@@ -113,7 +113,7 @@ public class Product implements Serializable {
   }
   
   public String toString() {
-      return "Product ID: " + ID + "\n Name: " + name + "\n Description: " + description + "\n In Stock: " + stockCount + "\n Sale Price: " + saleprice;
+      return "Product ID: " + ID + "\n Name: " + name + "\n Description: " + description + "\n In Stock: " + stockCount + "\n Sale Price: " + String.format("%.2f", saleprice);
   }
 
 
