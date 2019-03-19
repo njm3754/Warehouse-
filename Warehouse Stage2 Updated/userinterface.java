@@ -132,7 +132,7 @@ public class userinterface {
 		System.out.println(ADD_PRODUCTS + " to add products");
 		System.out.println(ADD_MANUFACTURER + " to add a manufacturer");
 		System.out.println(ASSIGN_PRODUCT_TO_MANUFACTURER + " to assign a product to a manufacturer");
-		System.out.println(UNASSIGN_PRODUCT_TO_MANUFACTURER + " to assign a product to a manufacturer");
+		System.out.println(UNASSIGN_PRODUCT_TO_MANUFACTURER + " to unassign a product to a manufacturer");
 		System.out.println(SHOW_CLIENTS + " to show a list of clients");
 		System.out.println(SHOW_MANUFACTURERS + " to show a list of manufacturers");
 		System.out.println(SHOW_PRODUCTS + " to show a list of products");
