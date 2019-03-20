@@ -45,8 +45,14 @@ public class Product implements Serializable {
 
   public int removeStock(int quantity)
   {
+    if (stockCount - quantity > 0) {
       stockCount -= quantity;
-      return stockCount;
+    }
+    else {
+      stockCount = 0;
+    }
+
+    return stockCount;
   }
   
   public Iterator  addStock(int stockCount1) {
