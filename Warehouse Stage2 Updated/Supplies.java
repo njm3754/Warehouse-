@@ -24,7 +24,7 @@ public class Supplies implements Serializable {
 	}
 	
 	public String toString() {
-	    return  manufacturer.toString() +  " " + product.toString() + " Price " + price;
+	    return  manufacturer.toString() +  "\n" + product.toString() + "\nPrice " + String.format("%.2f", price);
 	  }
 	  
 }

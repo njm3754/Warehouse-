@@ -42,6 +42,12 @@ public class Product implements Serializable {
   {
 	  return productWaitlist.add(waitlistItem);
   }
+
+  public int removeStock(int quantity)
+  {
+      stockCount -= quantity;
+      return stockCount;
+  }
   
   public Iterator  addStock(int stockCount1) {
       Iterator<WaitlistItem> WaitlistedItems = getProductWaitlist(); 

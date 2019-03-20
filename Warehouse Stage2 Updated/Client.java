@@ -125,7 +125,8 @@ public class Client implements Serializable{
       
 	  if (quantityAvailable > 0)
 	  {
-		orderItem2 = createOrderItem(product, quantityAvailable, salePrice);
+    orderItem2 = createOrderItem(product, quantityAvailable, salePrice);
+    product.removeStock(quantityAvailable);
 		addOrderItem(orderItem2, invoice);  
 	  }
       
