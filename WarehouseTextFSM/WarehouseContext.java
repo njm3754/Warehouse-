@@ -86,14 +86,9 @@ public class WarehouseContext {
 		//#region States
 		states = new WarehouseState[4];
 		states[0] = ManagerState.instance();
-		states[1] = ManagerState.instance();
-		states[2] = ManagerState.instance();
-		states[3] = ManagerState.instance();
-
-		/*states[1] = ClerkState.instance();
+		states[1] = ClerkState.instance();
 		states[2] = ClientState.instance(); 
-		states[3]=  Loginstate.instance();*/
-
+		states[3]=  Loginstate.instance();
 		//#endregion States
 
 		//#region Transition Table
