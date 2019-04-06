@@ -32,6 +32,11 @@ public class Product implements Serializable {
   public float getSalePrice() {
 	  return saleprice;
   }
+
+  public void setSalePrice(float newPrice)
+  {
+    saleprice = newPrice;
+  }
   
   public Iterator<WaitlistItem> getProductWaitlist()
   {

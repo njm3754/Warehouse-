@@ -115,22 +115,22 @@ public class ManagerState extends WarehouseState {
 		String productID = getToken("Enter product UPC");
 		float newPrice = getFloat("Enter new sale price");
 
-		if (confirmOperation())
-		{
-			if (warehouse.modifyProductSalePrice(productID, newPrice)) {
-				System.out.println("Product sale price successfully modified.");
+		Product product = warehouse.searchProduct(productID);
+		if (product != null) {
+			if (confirmOperation())
+			{
+				product.setSalePrice(newPrice);
+				System.out.println("\nProduct sale price successfully modified \n" + product.toString());	
 			}
 			else
 			{
-				System.out.println("Could not modify product sale price");
+				System.out.println("\nPassword could not be verified, operation aborted.");
 			}
-
-			System.out.println("Product sale price successfully modified.");
 		}
 		else
 		{
-			System.out.println("Password could not be verified, operation aborted.");
-		}		
+			System.out.println("\nProduct not found.");
+		}	
 	}
 
 	public void addManufacturer()
@@ -140,7 +140,7 @@ public class ManagerState extends WarehouseState {
 		
 		if (confirmOperation())
 		{
-			System.out.println("Password verified, operation confirmed.");
+			System.out.println("\nPassword verified, operation confirmed.");
 
 			Manufacturer result = warehouse.addManufacturer(name, address);
 			if (result == null) {
@@ -153,7 +153,7 @@ public class ManagerState extends WarehouseState {
 		}
 		else
 		{
-			System.out.println("Password could not be verified, operation aborted.");
+			System.out.println("\nPassword could not be verified, operation aborted.");
 		}
 	}
 
@@ -165,7 +165,7 @@ public class ManagerState extends WarehouseState {
 
 		if (confirmOperation())
 		{
-			System.out.println("Password verified, operation confirmed.");
+			System.out.println("\nPassword verified, operation confirmed.");
 
 			Supplies result = warehouse.assignProductToManufacturer(productID, manufacturerID, price);
 			if (result == null) {
@@ -178,7 +178,7 @@ public class ManagerState extends WarehouseState {
 		}
 		else
 		{
-			System.out.println("Password could not be verified, operation aborted.");
+			System.out.println("\nPassword could not be verified, operation aborted.");
 		}
 	}
 
@@ -198,12 +198,11 @@ public class ManagerState extends WarehouseState {
 
 	private boolean confirmOperation()
 	{
-		return security.verifyPswd(getToken("Enter password to confirm operation"));
+		return security.verifyPswd(getToken("\nEnter password to confirm operation"));
 	}
 
 	public void exit()
 	{
-		System.exit(0);
 		context.changeState(WarehouseContext.BACK);
 	}
 
