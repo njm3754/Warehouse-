@@ -91,7 +91,7 @@ public class ManagerState extends WarehouseState {
 	public int getCommand() {
 		do {
 			try {
-				int value = Integer.parseInt(getToken("Enter command:" + HELP + " for help"));
+				int value = Integer.parseInt(getToken("Enter command: " + HELP + " for help"));
 				if (value >= EXIT && value <= HELP) {
 					return value;
 				}
@@ -102,7 +102,7 @@ public class ManagerState extends WarehouseState {
 	}
 
 	public void help() {
-		System.out.println("Enter a number between 0 and 12 as explained below:");
+		System.out.println("Enter a number between " + EXIT + " and " + HELP + " as explained below:");
 		System.out.println(EXIT + " to Exit\n");
 		System.out.println(MODIFY_PRODUCT_SALE_PRICE + " to modify the sale price of a product");
 		System.out.println(ADD_MANUFACTURER + " to add a manufacturer");

@@ -77,14 +77,13 @@ public class WarehouseContext {
 	{ return userID;}
 
 	private WarehouseContext() { //constructor
-		if (yesOrNo("Look for saved data and  use it?")) {
-			retrieve();
-		}
-		else {
-			warehouse = Warehouse.instance();
-		}
+		configureWarehouse();
+	}
 
-		// set up the FSM and transition table;
+	//Set up the FSM and transition table;
+	private void configureFSM()
+	{
+		//#region States
 		states = new WarehouseState[4];
 		states[0] = ManagerState.instance();
 		states[1] = ManagerState.instance();
@@ -95,6 +94,9 @@ public class WarehouseContext {
 		states[2] = ClientState.instance(); 
 		states[3]=  Loginstate.instance();*/
 
+		//#endregion States
+
+		//#region Transition Table
 		nextState = new int[4][5];
 
 		//#region ManagerState
@@ -129,26 +131,36 @@ public class WarehouseContext {
 		nextState[3][MANAGER_MENU] = 0;
 		//#endregion LoginState
 
+		//#endregion Transition Table
+
 		currentState = 3; //LoginState
 	}
 
+	private void configureWarehouse()
+	{
+		if (yesOrNo("Look for saved data and  use it?")) {
+			retrieve();
+		}
+		else {
+			warehouse = Warehouse.instance();
+		}
+	}
+	
 	public void changeState(int transition)
 	{
-		//System.out.println("current state " + currentState + " \n \n ");
 		currentState = nextState[currentState][transition];
 		if (currentState == ERROR_CODE) 
 		{
 			System.out.println("Error has occurred");
 			terminate();
 		}
-		//System.out.println("current state " + currentState + " \n \n ");
 		states[currentState].run();
 	}
 
 	private void terminate()
 	{
 		if (yesOrNo("Save data?")) {
-			if (warehouse.save()) {
+			if (Warehouse.save()) {
 				System.out.println(" The warehouse has been successfully saved in the file WarehouseData \n" );
 			}
 			else {
@@ -166,11 +178,13 @@ public class WarehouseContext {
 		return instance;
 	}
 
-	/*public void process(){
+	public void process(){
 		states[currentState].run();
 	}
 	
 	public static void main (String[] args){
-		WarehouseContext.instance().process(); 
-	}*/
+		WarehouseContext context = WarehouseContext.instance();
+		context.configureFSM();
+		context.process();
+	}
 }
