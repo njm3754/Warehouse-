@@ -187,8 +187,6 @@ public class ManagerState extends WarehouseState {
 		if (confirmOperation())
 		{
 			context.changeState(WarehouseContext.SALESCLERK_MENU);
-			System.out.println("Go to clerk menu");
-			System.exit(0);
 		}
 		else
 		{
