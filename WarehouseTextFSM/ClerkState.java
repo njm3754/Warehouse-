@@ -278,8 +278,7 @@ public class ClerkState extends WarehouseState {
         if (findClient(clientID)) {
             context.setUser(clientID);
             context.changeState(WarehouseContext.CLIENT_MENU);
-            System.out.println("Go to client menu");
-            System.exit(0);
+            
         } else {
             System.out.println("Client ID could not be verified, operation aborted.");
         }
