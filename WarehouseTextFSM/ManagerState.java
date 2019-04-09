@@ -196,7 +196,7 @@ public class ManagerState extends WarehouseState {
 
 	private boolean confirmOperation()
 	{
-		return security.verifyPswd(getToken("\nEnter password to confirm operation"));
+		return security.verifyManager(getToken("\nEnter password to confirm operation"));
 	}
 
 	public void exit()
