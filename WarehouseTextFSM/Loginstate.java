@@ -113,7 +113,7 @@ public class Loginstate extends WarehouseState{
                         "input 2 to login as Manager\n" +
                         "input 3 to exit the system\n"); 
     }
-    (WarehouseContext.instance()).changeState(3);
+    WarehouseContext.instance().changeState(WarehouseContext.EXIT_PROGRAM);
   }
 
   public void run() {
