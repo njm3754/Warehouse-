@@ -21,8 +21,7 @@ public class ClientState extends WarehouseState {
     private static final int ACCEPT_PAYMENT = 4;
     private static final int SHOW_CLIENT_WAITLISTED_ORDERS = 5;
     private static final int CHECK_PRODUCT_PRICE = 6;
-    private static final int LOGOUT = 7;
-    private static final int HELP = 8;
+    private static final int HELP = 7;
 
     private ClientState() {
         super();
@@ -108,7 +107,6 @@ public class ClientState extends WarehouseState {
         System.out.println(ACCEPT_PAYMENT + " to enter a payment");
         System.out.println(SHOW_CLIENT_WAITLISTED_ORDERS + " to show a list of waitlisted orders for a client");
         System.out.println(CHECK_PRODUCT_PRICE + " to check the price of a product");
-        System.out.println(LOGOUT + " to go back to the clerk menu");
         System.out.println(HELP + " for help");
     }
 
@@ -198,7 +196,7 @@ public class ClientState extends WarehouseState {
             Product product = (Product) (productList.next());
             if (product.getProductID().equals(productID)) {
                 found = true;
-                System.out.println("The Product price is: $" + product.getSalePrice());
+                System.out.println("The Product price is: $" + String.format("%.2f", product.getSalePrice()));
             }
         }
         if (!found) {
@@ -206,15 +204,11 @@ public class ClientState extends WarehouseState {
         }
     }
 
-    public void logout() {
+    public void exit() {
         if (context.getLogin() == 0||context.getLogin()==1){
         context.changeState(WarehouseContext.LOGOUT);
         }
         else 
-            System.out.println("Invalid operation, must be signed in as manager or clerk.");
-    }
-
-    public void exit() {
         context.changeState(WarehouseContext.BACK);
     }
 
