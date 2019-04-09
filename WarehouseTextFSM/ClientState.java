@@ -174,7 +174,7 @@ public class ClientState extends WarehouseState {
     public void acceptPayment() {
         float paymentAmount = getFloat("Enter payment amount");
         float newAccountBalance = warehouse.makePayment(context.getUser(), paymentAmount);
-        System.out.println("Payment accepted. New Account Balance: " + newAccountBalance);
+        System.out.println("Payment accepted. New Account Balance: " + String.format("%.2f", newAccountBalance));
     }
 
     public void showClientWaitlistedOrders() {

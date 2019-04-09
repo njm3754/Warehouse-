@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,14 +21,12 @@ public class ClerkState extends WarehouseState {
     private static final int SHOW_PRODUCTS = 5;
     private static final int SHOW_PRODUCT_SUPPLIERS = 6;
     private static final int SHOW_MANUFACTURER_PRODUCTS = 7;
-    private static final int ACCEPT_PAYMENT = 8;
-    private static final int SHOW_OUTSTANDING_BALANCE_CLIENTS = 9;
-    private static final int SHOW_PRODUCT_WAITLISTED_ORDERS = 10;
-    private static final int SHOW_CLIENT_WAITLISTED_ORDERS = 11;
-    private static final int RECEIVE_SHIPMENT = 12;
-    private static final int CLIENT_MENU = 13;
-    private static final int LOGOUT = 14;
-    private static final int HELP = 15;
+    private static final int SHOW_OUTSTANDING_BALANCE_CLIENTS = 8;
+    private static final int SHOW_PRODUCT_WAITLISTED_ORDERS = 9;
+    private static final int SHOW_CLIENT_WAITLISTED_ORDERS = 10;
+    private static final int RECEIVE_SHIPMENT = 11;
+    private static final int CLIENT_MENU = 12;
+    private static final int HELP = 13;
 
     private ClerkState() {
         super();
@@ -127,13 +124,11 @@ public class ClerkState extends WarehouseState {
         System.out.println(SHOW_PRODUCTS + " to show a list of products");
         System.out.println(SHOW_PRODUCT_SUPPLIERS + " to show a list of a product's suppliers");
         System.out.println(SHOW_MANUFACTURER_PRODUCTS + " to show a list of a manufacturer's supplied products");
-        System.out.println(ACCEPT_PAYMENT + " accept a client payment");
         System.out.println(SHOW_OUTSTANDING_BALANCE_CLIENTS + " to show a list of clients with an outstanding balance");
         System.out.println(SHOW_PRODUCT_WAITLISTED_ORDERS + " to show a list of waitlisted orders for a product");
         System.out.println(SHOW_CLIENT_WAITLISTED_ORDERS + " to show a list of waitlisted orders for a client");
         System.out.println(RECEIVE_SHIPMENT + " to receive a shipment");
         System.out.println(CLIENT_MENU + " to go to the client menu");
-        System.out.println(LOGOUT + "to go back to the manager menu");
         System.out.println(HELP + " for help");
     }
 
@@ -295,16 +290,12 @@ public class ClerkState extends WarehouseState {
         return false;
     }
 
-    public void logout() {
-        if (context.getLogin() == 0) {
-            context.changeState(WarehouseContext.LOGOUT);
-        } else {
-            System.out.println("Invalid operation, must be signed in as manager.");
-        }
-    }
 
     public void exit() {
-        context.changeState(WarehouseContext.BACK);
+        if (context.getLogin() == 0) {
+            context.changeState(WarehouseContext.LOGOUT);
+        } else
+            context.changeState(WarehouseContext.BACK);
     }
 
     public void process() {
@@ -333,9 +324,6 @@ public class ClerkState extends WarehouseState {
                 case SHOW_MANUFACTURER_PRODUCTS:
                     showManufacturerProducts();
                     break;
-                case ACCEPT_PAYMENT:
-                    acceptPayment();
-                    break;
                 case SHOW_OUTSTANDING_BALANCE_CLIENTS:
                     showOutstandingBalanceClients();
                     break;
@@ -350,9 +338,6 @@ public class ClerkState extends WarehouseState {
                     break;
                 case CLIENT_MENU:
                     clientMenu();
-                    break;
-                case LOGOUT:
-                    logout();
                     break;
                 case HELP:
                     help();
