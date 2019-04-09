@@ -5,10 +5,11 @@ public class Loginstate extends WarehouseState{
   private static final int CLERK_LOGIN = 0;
   private static final int CLIENT_LOGIN = 1;
   private static final int MANAGER_LOGIN = 2;
-
+  
   private static final int EXIT = 2;
   private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));  
   private WarehouseContext context;
+  private Security security;
   private static Loginstate instance;
   private Loginstate() {
       super();
@@ -61,7 +62,7 @@ public class Loginstate extends WarehouseState{
   private void clerk(){
 	 
 	 String userID = getToken("Please input the clerk id: ");
-	 if (userID.toLowerCase() == "clerk") {
+	 if (security.verifyClerk(userID.toLowerCase())) {
     (WarehouseContext.instance()).setLogin(WarehouseContext.IsClerk);
     (WarehouseContext.instance()).changeState(1);
   }
@@ -79,7 +80,7 @@ public class Loginstate extends WarehouseState{
   
   private void manager(){
 	    String managerID = getToken("Please input the manager id: ");
-	    if (managerID.toLowerCase() == "manager"){
+	    if (security.verifyManager(managerID.toLowerCase())){
 	      (WarehouseContext.instance()).setLogin(WarehouseContext.IsManager);
 	      (WarehouseContext.instance()).changeState(0);
 	    }
