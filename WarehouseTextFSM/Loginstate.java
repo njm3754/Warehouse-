@@ -6,7 +6,7 @@ public class Loginstate extends WarehouseState{
   private static final int CLIENT_LOGIN = 1;
   private static final int MANAGER_LOGIN = 2;
   
-  private static final int EXIT = 2;
+  private static final int EXIT = 3;
   private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));  
   private WarehouseContext context;
   private Security security;
@@ -14,6 +14,7 @@ public class Loginstate extends WarehouseState{
   private Loginstate() {
       super();
      context = WarehouseContext.instance();
+     security = Security.instance();
   }
 
   public static Loginstate instance() {
@@ -64,7 +65,7 @@ public class Loginstate extends WarehouseState{
 	 String userID = getToken("Please input the clerk id: ");
 	 if (security.verifyClerk(userID.toLowerCase())) {
     (WarehouseContext.instance()).setLogin(WarehouseContext.IsClerk);
-    (WarehouseContext.instance()).changeState(1);
+    (WarehouseContext.instance()).changeState(WarehouseContext.SALESCLERK_MENU);
   }
 }
   private void client(){
@@ -72,7 +73,7 @@ public class Loginstate extends WarehouseState{
     if (Warehouse.instance().searchClient(clientID) != null ){
       (WarehouseContext.instance()).setLogin(WarehouseContext.IsClient);
       (WarehouseContext.instance()).setUser(clientID);      
-      (WarehouseContext.instance()).changeState(2);
+      (WarehouseContext.instance()).changeState(WarehouseContext.CLIENT_MENU);
     }
     else 
       System.out.println("Invalid user id.");
@@ -82,7 +83,7 @@ public class Loginstate extends WarehouseState{
 	    String managerID = getToken("Please input the manager id: ");
 	    if (security.verifyManager(managerID.toLowerCase())){
 	      (WarehouseContext.instance()).setLogin(WarehouseContext.IsManager);
-	      (WarehouseContext.instance()).changeState(0);
+	      (WarehouseContext.instance()).changeState(WarehouseContext.MANAGER_MENU);
 	    }
 	    else 
 	      System.out.println("Invalid manager id.");
@@ -92,7 +93,7 @@ public class Loginstate extends WarehouseState{
   public void process() {
     int command;
     System.out.println("Please input 0 to login as Clerk\n"+ 
-                        "input 1 to login as User\n" +
+                        "input 1 to login as Client\n" +
                         "input 2 to login as Manager\n" +
                         "input 3 to exit the system\n");     
     while ((command = getCommand()) != EXIT) {
