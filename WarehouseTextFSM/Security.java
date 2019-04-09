@@ -3,13 +3,13 @@ public class Security {
 	private static Security instance;
 	private Security() {};
 	public boolean verifyManager(String check) {
-		if(check == "manager")
+		if(check.equals("manager"))
 			return true;
 		return false;
 	}
 	
 	public boolean verifyClerk(String check) {
-		if(check == "clerk")
+		if(check.equals("clerk"))
 			return true;
 		return false;
 	}

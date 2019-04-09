@@ -19,6 +19,7 @@ public class WarehouseContext {
 	public static final int CLIENT_MENU = 2;
 	public static final int SALESCLERK_MENU = 3;
 	public static final int MANAGER_MENU = 4;
+	public static final int EXIT_PROGRAM = 5;
 	//#endregion State Exit Codes
 
 	public static final int ERROR_CODE = -1;
@@ -119,7 +120,7 @@ public class WarehouseContext {
 		//#endregion ClientState
 
 		//#region LoginState
-		nextState[3][LOGOUT] = ERROR_CODE;
+		nextState[3][LOGOUT] = EXIT_PROGRAM;
 		nextState[3][BACK] = ERROR_CODE;
 		nextState[3][CLIENT_MENU] = 2;
 		nextState[3][SALESCLERK_MENU] = 1;
@@ -147,6 +148,10 @@ public class WarehouseContext {
 		if (currentState == ERROR_CODE) 
 		{
 			System.out.println("Error has occurred");
+			terminate();
+		}
+		else if (currentState == EXIT_PROGRAM)
+		{
 			terminate();
 		}
 		states[currentState].run();
