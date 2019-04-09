@@ -93,14 +93,15 @@ public class WarehouseContext {
 		//#endregion States
 
 		//#region Transition Table
-		nextState = new int[4][5];
+		nextState = new int[4][6];
 
 		//#region ManagerState
 		nextState[0][LOGOUT] = ERROR_CODE;
 		nextState[0][BACK] = 3;
 		nextState[0][CLIENT_MENU] = ERROR_CODE;
 		nextState[0][SALESCLERK_MENU] = 1 ;
-		nextState[0][MANAGER_MENU] = ERROR_CODE; //Current state is ManagerState
+		nextState[0][MANAGER_MENU] = ERROR_CODE;
+		nextState[0][EXIT_PROGRAM] = ERROR_CODE;
 		//#endregion ManagerState
 
 		//#region ClerkState
@@ -109,6 +110,7 @@ public class WarehouseContext {
 		nextState[1][CLIENT_MENU] = 2;
 		nextState[1][SALESCLERK_MENU] = ERROR_CODE;
 		nextState[1][MANAGER_MENU] = ERROR_CODE;
+		nextState[1][EXIT_PROGRAM] = ERROR_CODE;
 		//#endregion ClerkState
 
 		//#region ClientState
@@ -117,14 +119,16 @@ public class WarehouseContext {
 		nextState[2][CLIENT_MENU] = ERROR_CODE;
 		nextState[2][SALESCLERK_MENU] = ERROR_CODE;
 		nextState[2][MANAGER_MENU] = ERROR_CODE;
+		nextState[2][EXIT_PROGRAM] = ERROR_CODE;
 		//#endregion ClientState
 
 		//#region LoginState
-		nextState[3][LOGOUT] = EXIT_PROGRAM;
+		nextState[3][LOGOUT] = ERROR_CODE;
 		nextState[3][BACK] = ERROR_CODE;
 		nextState[3][CLIENT_MENU] = 2;
 		nextState[3][SALESCLERK_MENU] = 1;
 		nextState[3][MANAGER_MENU] = 0;
+		nextState[3][EXIT_PROGRAM] = EXIT_PROGRAM;
 		//#endregion LoginState
 
 		//#endregion Transition Table
